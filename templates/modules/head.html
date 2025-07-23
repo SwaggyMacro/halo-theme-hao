@@ -8,7 +8,7 @@
     <title th:text="${siteTitle}"></title>
     <link rel="shortcut icon"
           th:href="@{${#strings.isEmpty(site.favicon) ? assets_link + '/images/hao-logo.jpg' : site.favicon}}"/>
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.ncii.cn/project/jquery/3.6.0/jquery.min.js"></script>
 
     <script th:src="${assets_link + '/js/heo.js' + theme_version}"></script>
 
@@ -27,10 +27,10 @@
     </style>
 
     <!-- swiper 在瞬间滚动时会使用 -->
-    <link th:if="${theme.config.top.moment}" rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/Swiper/8.0.6/swiper-bundle.min.css"/>
+    <link th:if="${theme.config.top.moment}" rel="stylesheet" href="https://cdn.ncii.cn/project/swiper/8.4.7/swiper-bundle.min.css"/>
     
     <!-- 右下角通知 -->
-    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css"
+    <link href="https://cdn.ncii.cn/project/node-snackbar/0.1.16/snackbar.min.css?v"
           media="print"
           onload='this.media="all"'
           rel="stylesheet"
