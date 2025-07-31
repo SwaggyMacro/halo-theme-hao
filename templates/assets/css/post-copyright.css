@@ -156,17 +156,12 @@
     #post .tag_share .post-meta__tag-list {
         display: flex;
         overflow: scroll;
-        position: absolute;
+        position: relative;
         left: 0;
         padding: 0 20px 0 20px;
         width: 100%;
     }
 }
-
-#post .tag_share .post-meta__tags:not(:last-child) {
-    margin: 0 0.5rem 0 0;
-}
-
 
 /* 提示 */
 #post > div.post-copyright > div.post-copyright__notice {
