@@ -12765,6 +12765,24 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
     display: none;
 }
 
+@media screen and (max-width: 768px) {
+    .tk-comments .el-button--primary {
+        position: static;
+    }
+
+    .el-button.tk-preview {
+        position: static;
+    }
+    
+    .tk-meta-input{
+        width: 100%;
+    }
+
+    .tk-preview-container {
+        margin-top: 1rem;
+    }
+}
+
 /* 发送按钮正常状态 */
 .tk-comments .el-button--primary {
     border-color: var(--heo-fontcolor) !important;
@@ -12799,12 +12817,6 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
 }
 
 @media screen and (max-width: 768px) {
-    .tk-submit .el-button--primary {
-        width: 5rem;
-        height: 122px;
-        top: -132px
-    }
-
     .tk-row-actions-start {
         top: -176px
     }
