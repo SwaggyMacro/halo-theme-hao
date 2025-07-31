@@ -12767,19 +12767,19 @@ button.el-button.tk-cancel.el-button--default.el-button--small {
 
 @media screen and (max-width: 768px) {
     .tk-comments .el-button--primary {
-        position: static;
+        position: static !important;
     }
 
     .el-button.tk-preview {
-        position: static;
+        position: static !important;
     }
     
     .tk-meta-input{
-        width: 100%;
+        width: 100% !important;
     }
 
     .tk-preview-container {
-        margin-top: 1rem;
+        margin-top: 1rem !important;
     }
 }
 
