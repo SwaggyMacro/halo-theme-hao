@@ -197,7 +197,7 @@ if (typeof window.FriendMomentsApp === 'undefined') {
         removeEventListeners() {
             if (this.eventListeners.length > 0) {
                 // console.log(`Removing ${this.eventListeners.length} event listeners for instance ${this.instanceId}`);
-                this.eventListeners.forEach(({element, event, handler}) => {
+                this.eventListeners.forEach(({ element, event, handler }) => {
                     if (element && element.removeEventListener) {
                         element.removeEventListener(event, handler);
                     }
@@ -212,7 +212,7 @@ if (typeof window.FriendMomentsApp === 'undefined') {
 
             if (element) {
                 element.addEventListener(event, handler);
-                this.eventListeners.push({element, event, handler});
+                this.eventListeners.push({ element, event, handler });
                 // console.log(`Added ${event} listener for instance ${this.instanceId}`);
             }
         }
@@ -237,6 +237,23 @@ if (typeof window.FriendMomentsApp === 'undefined') {
 
             if (loading) loading.style.display = 'none';
             if (container) container.style.display = 'grid';
+        }
+
+        escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function (match) {
+                switch (match) {
+                    case "&":
+                        return "&amp;";
+                    case "<":
+                        return "&lt;";
+                    case ">":
+                        return "&gt;";
+                    case '"':
+                        return "&quot;";
+                    case "'":
+                        return "&#39;";
+                }
+            });
         }
 
         async loadArticles(page = 1) {
@@ -282,10 +299,10 @@ if (typeof window.FriendMomentsApp === 'undefined') {
                 if (data.items && Array.isArray(data.items)) {
                     const newArticles = data.items.map(item => ({
                         id: item.metadata.name,
-                        author: item.spec.author,
+                        author: this.escapeHtml(item.spec.author),
                         authorUrl: item.spec.authorUrl,
-                        title: item.spec.title,
-                        description: item.spec.description,
+                        title: this.escapeHtml(item.spec.title),
+                        description: this.escapeHtml(item.spec.description),
                         postLink: item.spec.postLink,
                         logo: item.spec.logo,
                         pubDate: new Date(item.spec.pubDate),
@@ -771,6 +788,6 @@ if (typeof window.FriendMomentsApp === 'undefined') {
         }
     }
 
-// 导出类
+    // 导出类
     window.FriendMomentsApp = FriendMomentsApp;
 }
