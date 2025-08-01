@@ -320,7 +320,7 @@
 }
 
 .fMomentsArticleContent {
-  padding: 16px;
+  padding: 0 16px 16px 16px;
   height: 120px; /* 固定高度 */
   overflow: hidden; /* 隐藏超出部分 */
   display: flex;
@@ -560,7 +560,7 @@
   
   .fMomentsArticleContent {
     height: 110px;
-    padding: 12px;
+    padding: 0 12px 12px 12px;
   }
   
   .fMomentsArticleFooter {
@@ -618,7 +618,7 @@
   
   .fMomentsArticleContent {
     height: 100px;
-    padding: 10px;
+    padding: 0 10px 10px 10px;
   }
   
   .fMomentsArticleHeader {
