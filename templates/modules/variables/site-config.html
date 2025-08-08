@@ -64,14 +64,14 @@
                 linksUrl: [[${ theme.config.link.linksUrl }]],
                 linksNum: [[${theme.config.footer.footer_group.num}]],
             },
-            jQuery: 'https://cdn.ncii.cn/project/jquery/3.6.0/jquery.min.js',
+            jQuery: [[${assets_link + '/libs/jquery/3.6.0/jquery.min.js'}]],
             justifiedGallery: {
-                js: 'https://cdn.ncii.cn/project/flickr-justified-gallery/2.1.2/fjGallery.min.js',
-                css: 'https://cdn.ncii.cn/project/flickr-justified-gallery/2.1.2/fjGallery.css'
+                js: [[${assets_link + '/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js'}]],
+                css: [[${assets_link + '/libs/flickr-justified-gallery/2.1.2/fjGallery.css'}]]
             },
             fancybox: {
-                js: 'https://cdn.ncii.cn/project/fancybox/3.5.7/jquery.fancybox.min.js',
-                css: '/null'
+                js: [[${assets_link + '/libs/fancybox/3.5.7/jquery.fancybox.min.js'}]],
+                css: [[${assets_link + '/libs/fancybox/3.5.7/jquery.fancybox.min.css'}]]
             },
             comments: {
                 use: [[${theme.config.comments.use}]],
