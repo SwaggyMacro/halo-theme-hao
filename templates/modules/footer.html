@@ -101,10 +101,10 @@
         }
     </style>
 
-    <div th:if="${theme.config.footer.footerContent.default_enable_group.default_enable}" id="footer-banner" th:style="|padding:${theme.config.footer.footerContent.default_enable_group.footer_banner_padding}rem|">
-        <div class="footer-banner-links">
-            <div class="footer-banner-left">
-                <div id="footer-banner-tips">
+    <div th:if="${theme.config.footer.footerContent.default_enable_group.default_enable}" id="footer-container" th:style="|padding:${theme.config.footer.footerContent.default_enable_group.footer_banner_padding}rem|">
+        <div class="footer-container-links">
+            <div class="footer-container-left">
+                <div id="footer-container-tips">
                     <div style="display: flex;flex-direction: row;align-items: center;">
                         <th:block th:if="${not #strings.isEmpty(theme.config.basics.siteStartTime)}">
                             ©[[${#strings.arraySplit(theme.config.basics.siteStartTime, '-')[0]}]] - [[${#dates.format(new
@@ -113,15 +113,15 @@
                         <th:block th:if="${#strings.isEmpty(theme.config.basics.siteStartTime)}">
                             ©[[${#dates.format(new java.util.Date(), 'yyyy')}]]
                         </th:block>
-                        By <a class="footer-banner-link" href="/" target="_blank">[[${site.title}]]</a>
+                        By <a class="footer-container-link" href="/" target="_blank">[[${site.title}]]</a>
                     </div>
                 </div>
             </div>
-            <div class="footer-banner-right">
+            <div class="footer-container-right">
                 
                 <!-- 又拍云 -->
                 <a th:if="${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'upyun_cloud'}"
-                   class="footer-banner-link cloud" href="https://www.upyun.com/"
+                   class="footer-container-link cloud" href="https://www.upyun.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
@@ -130,7 +130,7 @@
                 </a>
                 <!-- 阿里云 -->
                 <a th:if="${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'aliyun_cloud'}"
-                   class="footer-banner-link cloud" href="https://www.aliyun.com/"
+                   class="footer-container-link cloud" href="https://www.aliyun.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
@@ -139,7 +139,7 @@
                 </a>
                 <!-- 腾讯云 -->
                 <a th:if="${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'tencent_cloud'}"
-                   class="footer-banner-link cloud" href="https://cloud.tencent.com/"
+                   class="footer-container-link cloud" href="https://cloud.tencent.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
@@ -148,7 +148,7 @@
                 </a>
                 <!-- 华为云 -->
                 <a th:if="${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'huawei_cloud'}"
-                   class="footer-banner-link cloud" href="https://www.huaweicloud.com/"
+                   class="footer-container-link cloud" href="https://www.huaweicloud.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
@@ -157,7 +157,7 @@
                 </a>
                 <!-- 自定义云服务信息 -->
                 <a th:if="${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'custom_cloud' && not #strings.isEmpty(theme.config.footer.footerContent.default_enable_group.yunzhichi_url)}"
-                   class="footer-banner-link cloud" th:href="@{${theme.config.footer.footerContent.default_enable_group.yunzhichi_url_link}}"
+                   class="footer-container-link cloud" th:href="@{${theme.config.footer.footerContent.default_enable_group.yunzhichi_url_link}}"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
@@ -166,11 +166,11 @@
                 </a>
                 
                 <!-- 订阅 需要 RSS 插件支持 -->
-                <a class="footer-banner-link" href="/rss.xml" th:if="${pluginFinder.available('PluginFeed')} and ${theme.config.footer.footerContent.default_enable_group.dingyue}">订阅</a>
-                <a th:if="${theme.config.footer.footerContent.default_enable_group.zhuti}" class="footer-banner-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
-                <a th:if="${theme.config.footer.footerContent.default_enable_group.about}" class="footer-banner-link" href="/about">关于</a>
+                <a class="footer-container-link" href="/rss.xml" th:if="${pluginFinder.available('PluginFeed')} and ${theme.config.footer.footerContent.default_enable_group.dingyue}">订阅</a>
+                <a th:if="${theme.config.footer.footerContent.default_enable_group.zhuti}" class="footer-container-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
+                <a th:if="${theme.config.footer.footerContent.default_enable_group.about}" class="footer-container-link" href="/about">关于</a>
                 <a th:if="${not #strings.isEmpty(theme.config.basics.icp) && theme.config.footer.footerContent.default_enable_group.icp_icon}"
-                   class="footer-banner-link" href="https://beian.miit.gov.cn/#/Integrated/index"
+                   class="footer-container-link" href="https://beian.miit.gov.cn/#/Integrated/index"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span th:if="${not #strings.startsWith(theme.config.basics.icp, 'http')}">[[${theme.config.basics
@@ -179,14 +179,14 @@
                          th:src="@{${theme.config.basics.icp}}" alt="icp"/>
                 </a>
                 <a th:if="${not #strings.isEmpty(theme.config.basics.gongan) && theme.config.footer.footerContent.default_enable_group.gongwangan}"
-                   class="footer-banner-link" href="http://www.beian.gov.cn/portal/registerSystemInfo"
+                   class="footer-container-link" href="http://www.beian.gov.cn/portal/registerSystemInfo"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span th:if="${not #strings.startsWith(theme.config.basics.gongan, 'http')}">[[${theme.config.basics.gongan}]]</span>
                     <img th:if="${#strings.startsWith(theme.config.basics.gongan, 'http')}"
                          th:src="@{${theme.config.basics.gongan}}" alt="gongan"/>
                 </a>
-                <a class="footer-banner-link cc" th:href="${theme.config.basics.copyrightAgreement}"
+                <a class="footer-container-link cc" th:href="${theme.config.basics.copyrightAgreement}"
                    th:if="${not #strings.isEmpty(theme.config.basics.copyrightAgreement) && theme.config.footer.footerContent.default_enable_group.yingsi}" title="cc协议">
                     <i class="haofont hao-icon-copyright-line"></i>
                     <i class="haofont hao-icon-creative-commons-by-line"></i>
@@ -214,7 +214,7 @@
     <div class="comment-barrage needEndHide" style="display: none;"></div>
 
     <style>
-        a.footer-banner-link.cloud {
+        a.footer-container-link.cloud {
             display: flex;
             align-items: center;
         }

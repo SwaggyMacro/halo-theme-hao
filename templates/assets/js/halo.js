@@ -433,7 +433,7 @@ let halo = {
     checkAd() {
         var default_enable = GLOBAL_CONFIG.source.footer.default_enable
         if (default_enable) {
-            var adElement = document.getElementById("footer-banner");
+            var adElement = document.getElementById("footer-container");
             var notMusic = document.body.getAttribute("data-type") != "music"; // 检测是否为音乐页面
             if ((adElement.offsetWidth <= 0 || adElement.offsetHeight <= 0) && notMusic) {
                 // 元素不可见，可能被拦截
