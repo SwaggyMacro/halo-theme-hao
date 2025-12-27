@@ -1,10 +1,56 @@
 <!-- 推荐文章 -->
 <div class="topGroup" id="topGroup"
-     th:with='topGroupPosts = ${postFinder.list(1,6)},
+     th:with='recommendPostType = ${theme.config.top.BannerRight.recommendPost},
+    latestPosts = ${postFinder.list({page: 1, size: 6, sort: {"spec.publishTime,desc"}})},
+    hotPosts = ${postFinder.list({page: 1, size: 6, sort: {"stats.visit,desc"}})},
+    randomPoolPosts = ${postFinder.list({page: 1, size: 30, sort: {"spec.publishTime,desc"}})},
     postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
     <div class="recent-post-group">
-        <div class="recent-post-item" th:each="post,iter : ${topGroupPosts}"
-             th:if="${#strings.equals(theme.config.top.BannerRight.recommendPost, 'latest')}">
+        <!-- 最新文章 -->
+        <div class="recent-post-item" th:each="post,iter : ${latestPosts}"
+             th:if="${#strings.equals(recommendPostType, 'latest')}">
+
+            <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
+                <a th:href="@{${post.status.permalink}}" th:title="${post.spec.title}">
+                    <span class="recent-post-top-text"
+                          th:attr="onclick='pjax.loadUrl(\''+ @{${post.status.permalink}} +'\')'">荐</span>
+                    <img class="post_bg"
+                         th:with=' img = ${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, "s")}'
+                         th:alt="${post.spec.title}" th:src="${isLazyload ? loadingImg : img}"
+                         th:data-lazy-src="${ isLazyload ? img : ''}" />
+                </a>
+            </div>
+            <div class="recent-post-info">
+                <a class="article-title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}"
+                   th:title="${post.spec.title}">
+                </a>
+            </div>
+        </div>
+        <!-- 随机文章 -->
+        <div class="recent-post-item random-post-item" th:each="post,iter : ${randomPoolPosts}"
+             th:if="${#strings.equals(recommendPostType, 'random')}"
+             th:data-index="${iter.index}"
+             style="display: none;">
+
+            <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
+                <a th:href="@{${post.status.permalink}}" th:title="${post.spec.title}">
+                    <span class="recent-post-top-text"
+                          th:attr="onclick='pjax.loadUrl(\''+ @{${post.status.permalink}} +'\')'">荐</span>
+                    <img class="post_bg"
+                         th:with=' img = ${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, "s")}'
+                         th:alt="${post.spec.title}" th:src="${isLazyload ? loadingImg : img}"
+                         th:data-lazy-src="${ isLazyload ? img : ''}" />
+                </a>
+            </div>
+            <div class="recent-post-info">
+                <a class="article-title" th:href="@{${post.status.permalink}}" th:text="${post.spec.title}"
+                   th:title="${post.spec.title}">
+                </a>
+            </div>
+        </div>
+        <!-- 按热度排序 -->
+        <div class="recent-post-item" th:each="post,iter : ${hotPosts}"
+             th:if="${#strings.equals(recommendPostType, 'hot')}">
 
             <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
                 <a th:href="@{${post.status.permalink}}" th:title="${post.spec.title}">
@@ -24,7 +70,7 @@
         </div>
         <!-- 自定义的文章右上角的推荐文章 -->
         <div class="recent-post-item" th:each="cuscomPost,iter : ${theme.config.top.BannerRight.recommendPostCustom}"
-             th:if="${#strings.equals(theme.config.top.BannerRight.recommendPost, 'custom') && not #strings.isEmpty(cuscomPost.post) }">
+             th:if="${#strings.equals(recommendPostType, 'custom') && not #strings.isEmpty(cuscomPost.post) }">
             <th:block th:with="post = ${postFinder.getByName(cuscomPost.post)}">
                 <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
                     <a th:href="@{${post.status.permalink}}" th:title="${post.spec.title}">
@@ -44,6 +90,38 @@
             </th:block>
         </div>
     </div>
+
+    <!-- 随机文章初始化脚本 -->
+    <script th:if="${#strings.equals(recommendPostType, 'random')}">
+        (function() {
+            var randomItems = document.querySelectorAll('.random-post-item');
+            if (randomItems.length > 0) {
+                var indices = [];
+                for (var i = 0; i < randomItems.length; i++) {
+                    indices.push(i);
+                }
+                // Fisher-Yates 洗牌算法
+                for (var i = indices.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = indices[i];
+                    indices[i] = indices[j];
+                    indices[j] = temp;
+                }
+                // 显示前6个随机文章
+                var showCount = Math.min(6, indices.length);
+                for (var i = 0; i < showCount; i++) {
+                    var item = randomItems[indices[i]];
+                    item.style.display = '';
+                    // 更新圆角样式
+                    var cover = item.querySelector('.post_cover');
+                    if (cover) {
+                        cover.classList.remove('left_radius', 'right_radius');
+                        cover.classList.add(i % 2 == 0 ? 'left_radius' : 'right_radius');
+                    }
+                }
+            }
+        })();
+    </script>
 
     <!-- 今日推荐 -->
     <div class="todayCard" id="todayCard" th:if="${theme.config.top.BannerRight.todayRecommend}"

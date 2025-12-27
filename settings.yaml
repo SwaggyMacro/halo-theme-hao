@@ -494,6 +494,10 @@ spec:
               options:
                 - label: 最新文章
                   value: latest
+                - label: 随机文章
+                  value: random
+                - label: 按热度排序
+                  value: hot
                 - label: 自定义
                   value: custom
             - $formkit: repeater
